@@ -1,0 +1,5 @@
+dev:
+  dialect: mysql
+  datasource: root:Ged4w4n&@tcp(167.71.214.239:3306)/golang?parseTime=true
+  dir: database/mysql/migrations
+  table: go_migrations

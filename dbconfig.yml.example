@@ -1,0 +1,11 @@
+dev:
+  dialect: mysql
+  datasource: root:@tcp(127.0.0.1:3306)/accelary?parseTime=true
+  dir: migrations/mysql
+  table: go_migrations
+
+dev:
+  dialect: mysql
+  datasource: accelaryadmin:accelaryADMIN098@tcp(accelarystaging.c7sobsklczw2.ap-southeast-1.rds.amazonaws.com:3306)/accelary?parseTime=true
+  dir: migrations/mysql
+  table: go_migrations
