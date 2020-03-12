@@ -10,6 +10,7 @@ import (
 type NewsServiceContract interface {
 	Create(news *model.News, tx *gorm.DB) (*model.News, error)
 	Get() ([]*model.News, error)
+	Find(ID int) (*model.News, error)
 }
 
 type newsContractService struct {
@@ -36,6 +37,18 @@ func (srv *newsContractService) Get() ([]*model.News, error) {
 	var err error
 
 	err = srv.db.Find(&news).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return news, nil
+}
+
+func (srv *newsContractService) Find(ID int) (*model.News, error) {
+	news := new(model.News)
+	var err error
+
+	err = srv.db.Where("id=?", ID).Find(&news).Error
 	if err != nil {
 		return nil, err
 	}

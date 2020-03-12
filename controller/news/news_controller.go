@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"runtime"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/adjust/rmq"
@@ -66,8 +67,11 @@ func CreateController(ctx *gin.Context) {
 func GetController(ctx *gin.Context) {
 	runtime.GOMAXPROCS(2)
 	var m map[string]interface{}
-	var data []*model.ElasticResponse
+	var data []*model.News
+	var wg sync.WaitGroup
 	cfg := config.NewConfig()
+
+	db, err := config.MysqlConnection(cfg)
 
 	//fetching data
 	go FetchController()
@@ -142,11 +146,26 @@ func GetController(ctx *gin.Context) {
 		id, _ := strconv.Atoi(hit.(map[string]interface{})["_id"].(string))
 		date, _ := time.Parse(time.RFC3339, hit.(map[string]interface{})["_source"].(map[string]interface{})["created"].(string))
 
-		datas := new(model.ElasticResponse)
+		datas := new(model.News)
 		datas.ID = id
 		datas.Created = date
+		wg.Add(1)
+		go func() {
+			newsContract := services.NewNewsServiceContract(db)
+			detaildata, err := newsContract.Find(id)
+			if err != nil {
+				datas.Author = ""
+				datas.Body = ""
+			} else {
+				datas.Author = detaildata.Author
+				datas.Body = detaildata.Body
+			}
+			wg.Done()
+		}()
+
 		data = append(data, datas)
 	}
+	wg.Wait()
 
 	httpresponse.NewSuccessResponsePaged(ctx, data, page)
 	return
