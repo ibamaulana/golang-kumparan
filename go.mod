@@ -1,4 +1,4 @@
-module golang-kumparan
+module github.com/ibamaulana/golang-kumparan
 
 go 1.13
 
@@ -14,7 +14,6 @@ require (
 	github.com/gin-gonic/gin v1.5.0
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gorilla/mux v1.7.4 // indirect
-	github.com/ibamaulana/golang-kumparan v0.0.0-20200312014335-4aa6e0bd5826
 	github.com/ibamaulana/golang-master v0.0.0-20200309015928-2b663bd14940
 	github.com/jinzhu/copier v0.0.0-20190924061706-b57f9002281a
 	github.com/jinzhu/gorm v1.9.12
