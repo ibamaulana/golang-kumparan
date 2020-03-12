@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/adjust/rmq"
-	"github.com/elastic/go-elasticsearch"
-	"github.com/elastic/go-elasticsearch/esapi"
+	"github.com/elastic/go-elasticsearch/v8"
+	"github.com/elastic/go-elasticsearch/v8/esapi"
 	"github.com/gin-gonic/gin"
 	"github.com/ibamaulana/golang-kumparan/config"
 	"github.com/ibamaulana/golang-kumparan/model"

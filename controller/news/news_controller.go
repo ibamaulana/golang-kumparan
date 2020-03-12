@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/adjust/rmq"
-	"github.com/elastic/go-elasticsearch"
+	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/ibamaulana/golang-kumparan/config"
