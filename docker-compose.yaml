@@ -14,3 +14,4 @@ services:
       - "3000:3001"
     environment:
       PORT: 3000
+      restart: always
