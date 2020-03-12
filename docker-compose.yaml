@@ -4,15 +4,13 @@ services:
   my-golang-app:
     image: golang:1.13.4-alpine
     container_name: my-golang-app
-    build:
-      context: app
-      dockerfile: Dockerfile
+    build: .
     command: go run main.go
     volumes:
     # lokasi main.go-mu
       - .:/go/src/app
     working_dir: /go/src/app
     ports:
-      - "9000:9001"
+      - "3000:3001"
     environment:
-      PORT: 9000
+      PORT: 3000
